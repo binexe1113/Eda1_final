@@ -75,9 +75,40 @@ int main()
                 break;
 
             case 5:
-    }
+                printf("Digite o codigo do cliente que sera alterado:\n");
+                codigo = validarCodigo()
+                if(consultaCodigo(li,codigo,&cl)){
+                    printf("Insira as novas informacoes para o cliente %d:\n", codigo);
+                    novosDados = coletadadocliente();
+                    status = editaCliente(li,codigo,novosDados);
+                    if (status){
+                        printf("Informacoes editadas com sucesso!\n");
+                    }else{
+                        printf("Erro! Falha na edicao.");
+                    }
+                    break;
 
 
-    printf("Hello world!\n");
+                }else{
+                    printf("Cliente com o codigo %d nao encontrado.",codigo);
+
+                };
+            case 6:
+                printf("\nDigite o codigo do cliente que sera removido: ");
+                codigo=validarCodigo();
+                status = removeOrdenado(li,codigo);
+                if(status){
+                    printf("\nCliente removido com sucesso da lista de contatos");
+                }else{
+                    printf("\nCliente nao encotnrado na lista de contatos");
+                }
+
+        }
+    } while(opcao != 7);
+    if(salvarLista(li,lista_de_contatos.bin)){
+        printf("\nDados da lista salvos com sucesso em %s.");
+    }else{
+        printf("\nFalha no salvamento de dados.")}
+    apagalista(li);
     return 0;
 }
