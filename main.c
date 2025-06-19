@@ -8,7 +8,12 @@ int main()
     char nome[99];
 
     CLIENTE cl;
-    Lista *li = criaLista();
+
+    Lista *li = carregalista(lista_de_contatos.bin);
+    if(li==NULL){
+        printf("\nNao foi possivel carregar a lista de contatos, inicializando uma nova...")
+        Lista *li = criaLista();
+    }
 
     do {
         printf("\n\nMENU");
@@ -108,7 +113,9 @@ int main()
     if(salvarLista(li,lista_de_contatos.bin)){
         printf("\nDados da lista salvos com sucesso em %s.");
     }else{
-        printf("\nFalha no salvamento de dados.")}
+        printf("\nFalha no salvamento de dados.")
+        }
+
     apagalista(li);
     return 0;
 }
