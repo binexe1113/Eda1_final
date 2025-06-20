@@ -1,46 +1,51 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include<string.h>
+#include "listaClientes.h"
 
 int main()
 {
     int opcao,status,codigo;
     char nome[99];
+    CLIENTE cl,novosDados;
 
-    CLIENTE cl;
-
-    Lista *li = carregalista(lista_de_contatos.bin);
+    Lista *li = carregaLista("lista_de_contatos.bin");
     if(li==NULL){
-        printf("\nNao foi possivel carregar a lista de contatos, inicializando uma nova...")
-        Lista *li = criaLista();
+        printf("\nERRO FATAL! Nao foi possivel carregar ou inicializar a lista de contatos.");
+        printf("\nENCERRANDO...\n\n\n");
+        return 1;
     }
 
     do {
-        printf("\n\nMENU");
+        printf("\n\n--------------MENU---------------");
+        printf("\nInsira uma das opcoes de 1 a 7:\n");
         printf("\n1 Inserir novo cliente");
         printf("\n2 Exibir todos os contatos");
         printf("\n3 Buscar cliente pelo codigo");
         printf("\n4 Buscar cliente pelo nome");
         printf("\n5 Editar informações de um cliente");
         printf("\n6 Remover cliente dos contatos");
-        printf("\n7 Sair da aplicacao");
+        printf("\n7 Sair da aplicacao\n");
+        printf("---------------------------------\n\n");
+        printf("Opcao: ");
 
         opcao = validarOpcao();
 
         switch(opcao){
             case 1:
-                printf("\nInserir novo contato:\n")
-                cl = coletaDadoCliente;
+                printf("\nInserir novo contato:\n");
+                cl = coletaDadoCliente();
                 status = insereOrdenada(li,cl);
                 if(status){
-                    printf("Cliente inserido com sucesso!")
+                    printf("Cliente inserido com sucesso!");
                 }else{
                     printf("Erro ao inserir o Cliente.");
                 }
                 break;
 
             case 2:
-                printf("TO DO");
+                printf("Exibindo todos os contatos...");
+                exibeTodosContatos(li);
                 break;
 
             case 3:
@@ -63,8 +68,9 @@ int main()
 
             case 4:
                 printf("Buscar cliente pelo nome: \n");
-                printf("Digite o codigo do cliente: ");
-                nome = validarNome();
+                printf("Digite o nome do cliente: ");
+                fgets(nome,sizeof(nome),stdin);
+                nome[strcspn(nome,"\n")] = '\0';
                 if(consultaNome(li,nome,&cl)){
                     printf("\nCliente encontrado:");
                     printf("\nCodigo: %d", cl.codigo);
@@ -81,11 +87,9 @@ int main()
 
             case 5:
                 printf("Digite o codigo do cliente que sera alterado:\n");
-                codigo = validarCodigo()
+                codigo = validarCodigo();
                 if(consultaCodigo(li,codigo,&cl)){
-                    printf("Insira as novas informacoes para o cliente %d:\n", codigo);
-                    novosDados = coletadadocliente();
-                    status = editaCliente(li,codigo,novosDados);
+                    status = editaCliente(li,codigo);
                     if (status){
                         printf("Informacoes editadas com sucesso!\n");
                     }else{
@@ -110,12 +114,12 @@ int main()
 
         }
     } while(opcao != 7);
-    if(salvarLista(li,lista_de_contatos.bin)){
-        printf("\nDados da lista salvos com sucesso em %s.");
+    if(salvarLista(li,"lista_de_contatos.bin")){
+        printf("\nSaindo com seguranca........");
     }else{
-        printf("\nFalha no salvamento de dados.")
+        printf("\nFalha no salvamento de dados.");
         }
 
-    apagalista(li);
+    apagaLista(li);
     return 0;
 }

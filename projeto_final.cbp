@@ -19,6 +19,10 @@
 				<Option compiler="gcc-mingw64" />
 			</Target>
 		</Build>
+		<Unit filename="listaClientes.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="listaClientes.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
