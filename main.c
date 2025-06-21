@@ -7,7 +7,7 @@ int main()
 {
     int opcao,status,codigo;
     char nome[99];
-    CLIENTE cl,novosDados;
+    CLIENTE cl,novosDados,clienteEncontrado,clienteEncontradoNome;
 
     Lista *li = carregaLista("lista_de_contatos.bin");
     if(li==NULL){
@@ -49,21 +49,25 @@ int main()
                 break;
 
             case 3:
+
                 printf("Buscar cliente pelo codigo: \n");
                 printf("Digite o codigo do cliente: ");
                 codigo = validarCodigo();
-                if(consultaCodigo(li,codigo,&cl)){
+                system("cls");
+                if(consultaCodigo(li,codigo,&clienteEncontrado)){
                     printf("\nCliente encontrado:");
-                    printf("\nCodigo: %d", cl.codigo);
-                    printf("\nNome: %s", cl.nome);
-                    printf("\nEmpresa: %s",cl.empresa);
-                    printf("\nDepartamento: %s",cl.departamento);
-                    printf("\nTelefone: %s",cl.telefone);
-                    printf("\nCelular: %s",cl.celular);
-                    printf("\nE-mail: %s",cl.email);
+                    printf("\nCodigo: %d", clienteEncontrado.codigo);
+                    printf("\nNome: %s", clienteEncontrado.nome);
+                    printf("\nEmpresa: %s",clienteEncontrado.empresa);
+                    printf("\nDepartamento: %s",clienteEncontrado.departamento);
+                    printf("\nTelefone: %s",clienteEncontrado.telefone);
+                    printf("\nCelular: %s",clienteEncontrado.celular);
+                    printf("\nE-mail: %s",clienteEncontrado.email);
+                    printf("\n--------------------------------------\n");
                 } else{
                     printf("\nCliente com o codigo %d nao encontrado.",codigo);
                 }
+                system("Pause");
                 break;
 
             case 4:
@@ -71,18 +75,9 @@ int main()
                 printf("Digite o nome do cliente: ");
                 fgets(nome,sizeof(nome),stdin);
                 nome[strcspn(nome,"\n")] = '\0';
-                if(consultaNome(li,nome,&cl)){
-                    printf("\nCliente encontrado:");
-                    printf("\nCodigo: %d", cl.codigo);
-                    printf("\nNome: %s", cl.nome);
-                    printf("\nEmpresa: %s",cl.empresa);
-                    printf("\nDepartamento: %s",cl.departamento);
-                    printf("\nTelefone: %s",cl.telefone);
-                    printf("\nCelular: %s",cl.celular);
-                    printf("\nE-mail: %s",cl.email);
-                } else{
-                    printf("\nCliente com o nome %s nao encontrado.",nome);
-                }
+                system("cls");
+                consultaNome(li,nome);
+                system("Pause");
                 break;
 
             case 5:
@@ -90,14 +85,10 @@ int main()
                 codigo = validarCodigo();
                 if(consultaCodigo(li,codigo,&cl)){
                     status = editaCliente(li,codigo);
-                    if (status){
-                        printf("Informacoes editadas com sucesso!\n");
-                    }else{
+                    if (!status){
                         printf("Erro! Falha na edicao.");
                     }
                     break;
-
-
                 }else{
                     printf("Cliente com o codigo %d nao encontrado.",codigo);
 
@@ -106,10 +97,10 @@ int main()
                 printf("\nDigite o codigo do cliente que sera removido: ");
                 codigo=validarCodigo();
                 status = removeOrdenado(li,codigo);
-                if(status){
-                    printf("\nCliente removido com sucesso da lista de contatos");
+                if(!status){
+                    printf("\nProcesso de remocao de cliente descontinuado!");
                 }else{
-                    printf("\nCliente nao encotnrado na lista de contatos");
+                    printf("\nProcesso de remocao finalizado com sucesso!");
                 }
 
         }

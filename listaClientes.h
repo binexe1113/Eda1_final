@@ -35,7 +35,7 @@ int validarOpcao();
 
 int consultaCodigo(Lista* li, int codigo, CLIENTE* clEncontrado);
 
-int  consultaNome(Lista* li, char* nomeBusca,CLIENTE* clEncontrado);
+int consultaNome(Lista* li,char* nome_busca);
 
 int editaCliente(Lista* li, int codigoBusca);
 
