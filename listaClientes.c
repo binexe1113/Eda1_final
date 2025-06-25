@@ -154,6 +154,7 @@ Lista* carregaLista(char* nome_arquivo) {
         return li;
     }
 
+    //Inicializo variavel cl do tipo CLIENTE
     CLIENTE cl;
 
     //Enquanto ler informaçoes da FILE (f) insere-os na lista.
@@ -318,7 +319,7 @@ char* strToLower(char* str) {
 //Essa funcao se tornou Case-Insensitive por causa da func strToLower(declarada acima)
 int consultaNome(Lista* li,char* nomeBusca) {
 
-    int clientesEncontradosCount=0;//Inicialmente implementei essa variavel para debug, mas achei uma boa ideia mante-la
+    int clientesEncontradosCount=0;
     char* nomeBuscaLower = strToLower(nomeBusca);//Converte input do usuario para minusculo SEM ALTERAR A STRING ORIGINAL
 
     //Verificaçao de segurança
@@ -372,7 +373,7 @@ int consultaNome(Lista* li,char* nomeBusca) {
     }
 
 
-    return clientesEncontradosCount;//Retorna o numero de clientes encontrados, antes usava para algo na main, mas deixei de usar
+    return 1;//True
 }
 
 //Funcao auxiliar para checagem de segurança
@@ -416,12 +417,6 @@ int editaCliente(Lista* li, int codigoBusca) {
         noAtual = noAtual->prox;
     }
 
-    //Se percorreu a lista toda e nao encontrou nenhum cliente com este codigo, avisa ao usuario e retorna 0
-    if (noAtual == NULL) {
-        printf("Erro: Cliente com o código %d nao encontrado.\n", codigoBusca);
-        return 0;//return (False)
-    }
-
     //Isso acontece se percorrer a lista e encontrar o codigo
     //Printa todas as informaçoes do cliente
 
@@ -444,74 +439,74 @@ int editaCliente(Lista* li, int codigoBusca) {
     //Se o usuario confirmou a ediçao, copio os dados atuais para uma nova variavel da struct CLIENTE
     //Sei que não precisa, poderia fazer direto, mas desse jeito acho que é mais "seguro"
     //colconado direto as novas informaçoes no noAtual deu alguns bugs
-    CLIENTE novosDados = noAtual->dados;
+        CLIENTE novosDados = noAtual->dados;
 
     //Todo esse bloco a seguir tem o mesmo funcionamento, pergunta se o usuario quer mudar o dado
         //Se o usuario quiser, armazena a nova informaçao dentro de novosDados
         //Senão, o dado antigo ja esta copiado na variavel novosDados
 
     //Inicio do bloco
-    printf("\nDeseja editar o nome do cliente? (s/n): ");
-    resposta = lerCharSN();
-    if (resposta == 's' || resposta == 'S') {
-    printf("\nNovo nome do cliente: ");
-    fgets(novosDados.nome, sizeof(novosDados.nome), stdin);
-    novosDados.nome[strcspn(novosDados.nome, "\n")] = '\0';
-    }
+        printf("\nDeseja editar o nome do cliente? (s/n): ");
+        resposta = lerCharSN();
+        if (resposta == 's' || resposta == 'S') {
+            printf("\nNovo nome do cliente: ");
+            fgets(novosDados.nome, sizeof(novosDados.nome), stdin);
+            novosDados.nome[strcspn(novosDados.nome, "\n")] = '\0';
+            }
 
-    printf("\nDeseja editar o nome da empresa? (s/n): ");
-    resposta = lerCharSN();
-    if (resposta == 's' || resposta == 'S') {
-    printf("Novo nome da empresa: ");
-    fgets(novosDados.empresa, sizeof(novosDados.empresa), stdin);
-    novosDados.empresa[strcspn(novosDados.empresa, "\n")] = '\0';
-    }
+        printf("\nDeseja editar o nome da empresa? (s/n): ");
+        resposta = lerCharSN();
+        if (resposta == 's' || resposta == 'S') {
+            printf("Novo nome da empresa: ");
+            fgets(novosDados.empresa, sizeof(novosDados.empresa), stdin);
+            novosDados.empresa[strcspn(novosDados.empresa, "\n")] = '\0';
+            }
 
-    printf("\nDeseja editar o nome do departamento? (s/n): ");
-    resposta = lerCharSN();
-    if (resposta == 's' || resposta == 'S') {
-    printf("Novo nome do departamento: ");
-    fgets(novosDados.departamento, sizeof(novosDados.departamento), stdin);
-    novosDados.departamento[strcspn(novosDados.departamento, "\n")] = '\0';
-    }
+        printf("\nDeseja editar o nome do departamento? (s/n): ");
+        resposta = lerCharSN();
+        if (resposta == 's' || resposta == 'S') {
+            printf("Novo nome do departamento: ");
+            fgets(novosDados.departamento, sizeof(novosDados.departamento), stdin);
+            novosDados.departamento[strcspn(novosDados.departamento, "\n")] = '\0';
+            }
 
-    printf("\nDeseja editar o telefone do cliente? (s/n): ");
-    resposta = lerCharSN();
-    if (resposta == 's' || resposta == 'S') {
-    printf("Novo telefone do cliente: ");
-    fgets(novosDados.telefone, sizeof(novosDados.telefone), stdin);
-    novosDados.telefone[strcspn(novosDados.telefone, "\n")] = '\0';
-    }
+        printf("\nDeseja editar o telefone do cliente? (s/n): ");
+        resposta = lerCharSN();
+        if (resposta == 's' || resposta == 'S') {
+            printf("Novo telefone do cliente: ");
+            fgets(novosDados.telefone, sizeof(novosDados.telefone), stdin);
+            novosDados.telefone[strcspn(novosDados.telefone, "\n")] = '\0';
+            }
 
-    printf("\nDeseja editar o celular do cliente? (s/n): ");
-    resposta = lerCharSN();
-    if (resposta == 's' || resposta == 'S') {
-    printf("Novo celular do cliente: ");
-    fgets(novosDados.celular, sizeof(novosDados.celular), stdin);
-    novosDados.celular[strcspn(novosDados.celular, "\n")] = '\0';
-    }
+        printf("\nDeseja editar o celular do cliente? (s/n): ");
+        resposta = lerCharSN();
+        if (resposta == 's' || resposta == 'S') {
+            printf("Novo celular do cliente: ");
+            fgets(novosDados.celular, sizeof(novosDados.celular), stdin);
+            novosDados.celular[strcspn(novosDados.celular, "\n")] = '\0';
+            }
 
-    printf("\nDeseja editar o email do cliente? (s/n): ");
-    resposta = lerCharSN();
-    if (resposta == 's' || resposta == 'S') {
-    printf("Novo email do cliente: ");
-    fgets(novosDados.email, sizeof(novosDados.email), stdin);
-    novosDados.email[strcspn(novosDados.email, "\n")] = '\0';
-    }
+        printf("\nDeseja editar o email do cliente? (s/n): ");
+        resposta = lerCharSN();
+            if (resposta == 's' || resposta == 'S') {
+            printf("Novo email do cliente: ");
+            fgets(novosDados.email, sizeof(novosDados.email), stdin);
+            novosDados.email[strcspn(novosDados.email, "\n")] = '\0';
+        }
 
     //Fim do bloco
 
     //Passa as informaçoes da var novosDados para o cliente atual
-    noAtual->dados = novosDados;
+        noAtual->dados = novosDados;
 
     //Mensagem de suceso
-    printf("\nInformacoes do cliente com codigo %d atualizadas com sucesso!\n", codigoBusca);
-    return 1;//Return True
-}else{
+        printf("\nInformacoes do cliente com codigo %d atualizadas com sucesso!\n", codigoBusca);
+        return 1;//Return True
+    }else{
     //Mensagem de erro
-    printf("\nEdicao cancelada!\n");
-    return 0;//Return False
-}
+        printf("\nEdicao cancelada!\n");
+        return 0;//Return False
+    }
 }
 
 //Funcao  remove ordenado (extraida diretamente dos slides da aula 11, com pequenas alterações)
@@ -635,7 +630,7 @@ void exibeTodosContatos(Lista* li) {
 
     //Inicializa o ponteiro para percorrer toda a lista
     ELEM* noAtual = *li;
-    //Contador implementado para debuggin
+
     int contador = 0;
 
     //Loop para fazer o nó percorrer a Lista inteira
@@ -658,6 +653,6 @@ void exibeTodosContatos(Lista* li) {
     printf("Total de contatos na lista: %d",contador);
     printf("\n--- FIM DO RELATORIO ---\n");
 
-}//Void nao retorna nada
+}
 
 

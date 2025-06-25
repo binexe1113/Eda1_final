@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1750555884 source:c:\users\nooba\onedrive\desktop\hhftgg\projeto_final\listaclientes.c
+1750814754 source:c:\users\nooba\onedrive\desktop\hhftgg\projeto_final\listaclientes.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -9,7 +9,7 @@
 
 1750545166 c:\users\nooba\onedrive\desktop\hhftgg\projeto_final\listaclientes.h
 
-1750555421 source:c:\users\nooba\onedrive\desktop\hhftgg\projeto_final\main.c
+1750571057 source:c:\users\nooba\onedrive\desktop\hhftgg\projeto_final\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
